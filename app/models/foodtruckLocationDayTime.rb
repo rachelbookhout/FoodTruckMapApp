@@ -1,4 +1,4 @@
-class foodtruckLocationDayTime < ActiveRecord::Base
+class FoodtruckLocationDayTime < ActiveRecord::Base
   belongs_to :foodtruck
   belongs_to :day
   belongs_to :mealtime
