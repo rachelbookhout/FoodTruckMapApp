@@ -1,3 +1,22 @@
+# require 'net/http'
+
+# truckData = Net::HTTP.get("data.streetfoodapp.com", "/1.1/schedule/boston/")
+# vendorData = JSON.parse(truckData)["vendors"];
+# vendorData.each do |vendor|
+#   ven = Foodtruck.exists?(['name LIKE ?', "%#{vendor[1]["name"]}%"])
+
+#   if ven == false
+#     Foodtruck.create(name: "#{vendor[1]["name"]}", url: "#{vendor[1]["url"]}",twitter: "#{vendor[1]["twitter"]}")
+#   end
+
+#   loc = Location.where(["latitude = ? AND longitude = ? ", "#{vendor[1]["last"]["latitude"]}", "#{vendor[1]["last"]["longitude"]}"])
+#   if loc.empty? == true
+#     Location.create(name: "#{vendor[1]["last"]["display"]}", latitude: "#{vendor[1]["last"]["latitude"]}", longitude: "#{vendor[1]["last"]["longitude"]}")
+#   end
+# end
+
+
+
 Day.create!([
   {day_id: 1, dayofweek: "Sunday"},
   {day_id: 2, dayofweek: "Monday"},
@@ -8,31 +27,37 @@ Day.create!([
   {day_id: 7, dayofweek: "Saturday"}
 ])
 Foodtruck.create!([
-  {name: "Baja Taco Truck", cuisine_id: nil, photo: nil, url: "bajatacotruck.com", twitter: "bajatacotruck"},
-  {name: "Bon Me Blue", cuisine_id: nil, photo: nil, url: "bonmetruck.com", twitter: "bonme"},
-  {name: "Boston Projuice", cuisine_id: nil, photo: nil, url: "bostonprojuice.com", twitter: "bostonprojuice"},
-  {name: "Cameo Macaron", cuisine_id: nil, photo: nil, url: "cameomacaron.com", twitter: "cameomacaron"},
-  {name: "Chicken & Rice Guys", cuisine_id: nil, photo: nil, url: "thechickenriceguys.com", twitter: "CnRGuys"},
-  {name: "The Coffee Trike", cuisine_id: nil, photo: nil, url: "thecoffeetrike.com", twitter: "thecoffeetrike"},
-  {name: "Compliments Food Truck", cuisine_id: nil, photo: nil, url: "complimentsfood.com", twitter: "complimentsfood"},
-  {name: "Cookie Monstah", cuisine_id: nil, photo: nil, url: "thecookiemonstah.com", twitter: "MonstahTruck"},
-  {name: "Cookie Monstah 2", cuisine_id: nil, photo: nil, url: "thecookiemonstah.com", twitter: "MonstahTruck"},
-  {name: "Fresh Food Generation", cuisine_id: nil, photo: nil, url: "freshfoodgeneration.com", twitter: "FFGeneration"},
-  {name: "Lilo's Plates", cuisine_id: nil, photo: nil, url: "lilosplates.com", twitter: "lilosplates"},
-  {name: "Mei Mei Street Kitchen", cuisine_id: nil, photo: nil, url: "meimeiboston.com", twitter: "meimeiboston"},
-  {name: "Momogoose 3", cuisine_id: nil, photo: nil, url: "momogoose.com", twitter: "momogoose"},
-  {name: "Moyzilla", cuisine_id: nil, photo: nil, url: "moyzillaboston.com", twitter: "moyzillatruck"},
-  {name: "Papi's Stuffed Sopapillas", cuisine_id: nil, photo: nil, url: "stuffedbypapi.com", twitter: "stuffedbypapi"},
-  {name: "Posto Mobile", cuisine_id: nil, photo: nil, url: "postomobile.com", twitter: "PostoMobile"},
-  {name: "ChikChak Food Truck", cuisine_id: nil, photo: nil, url: "ChikChakFoodTruck.com", twitter: "chikchakboston"},
-  {name: "Roxy's Grilled Cheese", cuisine_id: nil, photo: nil, url: "roxysgrilledcheese.com", twitter: "RoxysGrilledChz"},
-  {name: "SANTÉ ◦ Mobile Farmhouse Café", cuisine_id: nil, photo: nil, url: "santemobilecafe.com", twitter: "santemobilecafe"},
-  {name: "Slideby", cuisine_id: nil, photo: nil, url: "slidebyboston.com", twitter: "slidebyboston"},
-  {name: "Sweet Tomatoes Pizza", cuisine_id: nil, photo: nil, url: "sweettomatoespizzatruck.com", twitter: "swttomatotruck"},
-  {name: "Taco Party", cuisine_id: nil, photo: nil, url: "tacopartytruck.com", twitter: "tacopartytruck"},
-  {name: "Tenoch Mexican", cuisine_id: nil, photo: nil, url: "tenochmexican.com", twitter: "TenochMexican"},
-  {name: "Third Cliff Bakery Trike", cuisine_id: nil, photo: nil, url: "thirdcliffbakery.com", twitter: "ThirdCliffBaker"},
-  {name: "Zinneken's Waffles", cuisine_id: nil, photo: nil, url: "zinnetruck.com", twitter: "zinnetruck"}
+  {name: "Baja Taco Truck", cuisine_id: 1, photo: nil, url: "bajatacotruck.com", twitter: "bajatacotruck"},
+  {name: "Bon Me", cuisine_id: 2, photo: nil, url: "bonmetruck.com", twitter: "bonme"},
+  {name: "Boston Projuice", cuisine_id: 8, photo: nil, url: "bostonprojuice.com", twitter: "bostonprojuice"},
+  {name: "Cameo Macaron", cuisine_id: 3, photo: nil, url: "cameomacaron.com", twitter: "cameomacaron"},
+  {name: "Chicken & Rice Guys", cuisine_id: 7, photo: nil, url: "thechickenriceguys.com", twitter: "CnRGuys"},
+  {name: "The Coffee Trike", cuisine_id: 3, photo: nil, url: "thecoffeetrike.com", twitter: "thecoffeetrike"},
+  {name: "Compliments Food Truck", cuisine_id: 5, photo: nil, url: "complimentsfood.com", twitter: "complimentsfood"},
+  {name: "Cookie Monstah", cuisine_id: 3, photo: nil, url: "thecookiemonstah.com", twitter: "MonstahTruck"},
+  {name: "Fresh Food Generation", cuisine_id: 9, photo: nil, url: "freshfoodgeneration.com", twitter: "FFGeneration"},
+  {name: "Lilo's Plates", cuisine_id: 2, photo: nil, url: "lilosplates.com", twitter: "lilosplates"},
+  {name: "Mei Mei Street Kitchen", cuisine_id: 2, photo: nil, url: "meimeiboston.com", twitter: "meimeiboston"},
+  {name: "Momogoose", cuisine_id: 2, photo: nil, url: "momogoose.com", twitter: "momogoose"},
+  {name: "Moyzilla", cuisine_id: 2, photo: nil, url: "moyzillaboston.com", twitter: "moyzillatruck"},
+  {name: "Papi's Stuffed Sopapillas", cuisine_id: 1, photo: nil, url: "stuffedbypapi.com", twitter: "stuffedbypapi"},
+  {name: "Posto Mobile", cuisine_id: 4, photo: nil, url: "postomobile.com", twitter: "PostoMobile"},
+  {name: "ChikChak Food Truck", cuisine_id: 7, photo: nil, url: "ChikChakFoodTruck.com", twitter: "chikchakboston"},
+  {name: "Roxy's Grilled Cheese", cuisine_id: 5, photo: nil, url: "roxysgrilledcheese.com", twitter: "RoxysGrilledChz"},
+  {name: "SANTÉ ◦ Mobile Farmhouse Café", cuisine_id: 8, photo: nil, url: "santemobilecafe.com", twitter: "santemobilecafe"},
+  {name: "Slideby", cuisine_id: 5, photo: nil, url: "slidebyboston.com", twitter: "slidebyboston"},
+  {name: "Sweet Tomatoes Pizza", cuisine_id: 4, photo: nil, url: "sweettomatoespizzatruck.com", twitter: "swttomatotruck"},
+  {name: "Taco Party", cuisine_id: 1, photo: nil, url: "tacopartytruck.com", twitter: "tacopartytruck"},
+  {name: "Tenoch Mexican", cuisine_id: 1, photo: nil, url: "tenochmexican.com", twitter: "TenochMexican"},
+  {name: "Third Cliff Bakery Trike", cuisine_id: 3, photo: nil, url: "thirdcliffbakery.com", twitter: "ThirdCliffBaker"},
+  {name: "Zo on the Go", cuisine_id: 6, photo: nil, url: "http://www.zoboston.com/", twitter: "Zo_Boston"},
+  {name: "Yummy Bai", cuisine_id: 2, photo: nil, url: "http://www.yummbai.com/", twitter: "Yumm_Bai"},
+  {name: "The Dining Car", cuisine_id: 5, photo: nil, url: "http://diningcar.net/", twitter: "thediningcar"},
+  {name: "Stoked", cuisine_id: 4, photo: nil, url: "http://www.stokedpizzaco.com/", twitter: "stokedpizza"},
+  {name: "Saigon Alley", cuisine_id: 2, photo: nil, url: nil, twitter: "saigon_alley"},
+  {name: "Penny Packers", cuisine_id: 5, photo: nil, url: "http://www.pennypackersfinefoods.com/", twitter: "Pennypackers"},
+  {name: "Clover", cuisine_id: 8, photo: nil, url: "cloverfoodlab.com", twitter: "cloverfoodtruck"},
+  {name: "Zinneken's Waffles", cuisine_id: 3, photo: nil, url: "zinnetruck.com", twitter: "zinnetruck"}
 ])
 Location.create!([
   {name: "High Street, on The Greenway.", latitude: 42.3566935, longitude: -71.05111345},
