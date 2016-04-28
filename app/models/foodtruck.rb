@@ -1,6 +1,6 @@
 class Foodtruck < ActiveRecord::Base
-has_many :locations, through: :foodtruckLocationDayTimes
-has_many :days, through: :foodtruckLocationDayTimes
-has_many :mealtimes, through: :foodtruckLocationDayTimes
+has_many :locations, through: :schedules
+has_many :days, through: :schedules
+has_many :mealtimes, through: :schedules
 has_one :cuisine
 end

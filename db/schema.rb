@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160424202748) do
+ActiveRecord::Schema.define(version: 20160428020550) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,13 +24,6 @@ ActiveRecord::Schema.define(version: 20160424202748) do
   create_table "days", force: :cascade do |t|
     t.integer "day_id",    null: false
     t.string  "dayofweek", null: false
-  end
-
-  create_table "foodtruckLocationDayTimes", force: :cascade do |t|
-    t.integer "mealtime_id",  null: false
-    t.integer "day_id",       null: false
-    t.integer "foodtruck_id", null: false
-    t.integer "location_id",  null: false
   end
 
   create_table "foodtrucks", force: :cascade do |t|
@@ -50,6 +43,13 @@ ActiveRecord::Schema.define(version: 20160424202748) do
   create_table "mealtimes", force: :cascade do |t|
     t.integer "mealtime_id", null: false
     t.string  "meal",        null: false
+  end
+
+  create_table "schedules", force: :cascade do |t|
+    t.integer "mealtime_id",  null: false
+    t.integer "day_id",       null: false
+    t.integer "foodtruck_id", null: false
+    t.integer "location_id",  null: false
   end
 
 end
