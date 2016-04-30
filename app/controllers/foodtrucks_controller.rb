@@ -1,9 +1,12 @@
 class FoodtrucksController < ApplicationController
 
+ def index
+    if params[:search]
+    @trucks = Foodtruck.search(params[:search]));
+  else
+    @trucks = Foodtruck.all
 
-  def index
-    all_requests = Foodtruck.all
-    @trucks = []
+  end
     @geojson = []
     @trucks.each do |truck|
       @geojson << {
