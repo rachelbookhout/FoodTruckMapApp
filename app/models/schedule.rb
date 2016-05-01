@@ -5,34 +5,45 @@ class Schedule < ActiveRecord::Base
   belongs_to :location
 
   def self.search(search)
-    @trucks = [];
+  @trucks = [];
+
   if search
     # check search for cuisines
     @cuisines = Cuisine.where("name LIKE ?", "%#{search}%")
     if !@cuisines.empty?
-      @cuisines.each do |cuisine|
-        @trucks << Schedule.where(cuisine_id: "%#{cuisine.cuisine_id}%")
+      binding.pry
+      @cuisine_choice = Foodtruck.where(cuisine_id: "%#{@cuisines[0]["cuisine_id"]}%")
+      @cuisine_choice.each do |cuisine|
+        @trucks << cuisine
       end
     end
     #check search for days
     @days = Day.where("dayofweek LIKE ?", "%#{search}%")
      if !@days.empty?
-      @days.each do |day|
-        @trucks << Schedule.where(day_id: "#{day.id}%")
+      @foodtrucksOnDay = Schedule.where(day_id: "#{@days[0]["id"]}")
+      @foodtrucksOnDay.each do |day|
+        @trucks << day
       end
      end
     #check search for timeperiod
     @mealtimes = Mealtime.where("meal LIKE ?", "%#{search}%")
      if !@mealtimes.empty?
+      @mealChoice = Schedule.where(mealtime_id: "#{@mealtimes[0]["id"]}")
       @mealtimes.each do |meal|
-        @trucks << Schedule.where(mealtime_id: "#{meal.id}%")
+        @trucks << meal
       end
      end
     #check search for location
     @locations = Location.where("name LIKE ?", "%#{search}%")
      if !@locations.empty?
       @locations.each do |location|
-        @trucks << Schedule.where(location_id: "#{location.id}%")
+        @trucksLocation = Schedule.where(location_id: "#{location["id"]}")
+        @trucksLocation.each do |loc|
+          @truckInfo = Schedule.where(location_id: "#{loc["id"]}")
+          @truckInfo.each do |l|
+            @trucks << l
+          end
+        end
       end
      end
   else
