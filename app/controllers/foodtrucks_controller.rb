@@ -5,6 +5,13 @@ class FoodtrucksController < ApplicationController
   #   @trucks = Foodtruck.search(params[:search]));
   # else
     @trucks = Schedule.search(params[:search])
+    #trucks is within the @trucks array, need to query off its food truck id
+    @info = [];
+    @trucks.each do |truck|
+      @info << Foodtruck.where(id: "#{truck.foodtruck_id}")
+    end
+
+
 
   # end
   #   @geojson = []

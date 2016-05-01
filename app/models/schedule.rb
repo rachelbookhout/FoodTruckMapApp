@@ -5,7 +5,6 @@ class Schedule < ActiveRecord::Base
   belongs_to :location
 
   def self.search(search)
-    binding.pry
     @trucks = [];
   if search
     # check search for cuisines
@@ -33,16 +32,12 @@ class Schedule < ActiveRecord::Base
     @locations = Location.where("name LIKE ?", "%#{search}%")
      if !@locations.empty?
       @locations.each do |location|
-        binding.pry
         @trucks << Schedule.where(location_id: "#{location.id}%")
-        binding.pry
       end
      end
-     binding.pry
   else
-    @trucks = Foodtruck.all;
+    @trucks = Schedule.all;
   end
-  binding.pry
   return @trucks
 end
 end
