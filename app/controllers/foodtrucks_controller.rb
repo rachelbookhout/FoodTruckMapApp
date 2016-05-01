@@ -4,8 +4,7 @@ class FoodtrucksController < ApplicationController
   #   if params[:search]
   #   @trucks = Foodtruck.search(params[:search]));
   # else
-  #   @trucks = Foodtruck.all
-
+    @trucks = Schedule.search(params[:search])
   # end
   #   @geojson = []
   #   @trucks.each do |truck|
@@ -29,5 +28,4 @@ class FoodtrucksController < ApplicationController
   #     format.json { render json: @geojson }
   #   end
    end
-
 end
