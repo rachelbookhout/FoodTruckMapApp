@@ -5,6 +5,7 @@ class FoodtrucksController < ApplicationController
   #   @trucks = Foodtruck.search(params[:search]));
   # else
     @trucks = Schedule.search(params[:search])
+
   # end
   #   @geojson = []
   #   @trucks.each do |truck|
