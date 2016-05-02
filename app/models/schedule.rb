@@ -7,12 +7,11 @@ class Schedule < ActiveRecord::Base
   def self.search(search)
   @trucks = [];
 
-  if search
+  if search != nil
     # check search for cuisines
     @cuisines = Cuisine.where("name LIKE ?", "%#{search}%")
     if !@cuisines.empty?
-      binding.pry
-      @cuisine_choice = Foodtruck.where(cuisine_id: "%#{@cuisines[0]["cuisine_id"]}%")
+      @cuisine_choice = Foodtruck.where(cuisine_id: "#{@cuisines[0]["cuisine_id"]}")
       @cuisine_choice.each do |cuisine|
         @trucks << cuisine
       end
@@ -29,10 +28,11 @@ class Schedule < ActiveRecord::Base
     @mealtimes = Mealtime.where("meal LIKE ?", "%#{search}%")
      if !@mealtimes.empty?
       @mealChoice = Schedule.where(mealtime_id: "#{@mealtimes[0]["id"]}")
-      @mealtimes.each do |meal|
+      @mealChoice.each do |meal|
         @trucks << meal
       end
      end
+
     #check search for location
     @locations = Location.where("name LIKE ?", "%#{search}%")
      if !@locations.empty?
@@ -46,8 +46,6 @@ class Schedule < ActiveRecord::Base
         end
       end
      end
-  else
-    @trucks = Schedule.all;
   end
   return @trucks
 end
