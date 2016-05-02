@@ -30,9 +30,11 @@ map.featureLayer.on('layeradd', function(e) {
   var marker, popupContent, properties;
   marker = e.layer;
   properties = marker.feature.properties;
-  popupContent = 'Hi!'
-  //'<div class="popup">' + '<h3>' + '<a href ="requests/' + properties.num + '">'
-  //+ properties.name + '</a>' +'</h3>' + '<h4> From: ' + properties.start_time + '</h4> ' + '<h4> To: ' + properties.end_time +  '</h4>' +'<p>' + '<img src="' + properties.photo + '" width = "300px" height = "300px">' + '</p>' + '</div>';
+  popupContent ='<div class="popup">' + '<h3>' + '<a href="' + properties.url + '">' + properties.name + '</a></h3>'
+  + '<p>Location: ' + properties.spot + '</p>' +
+   '<p>Cuisine: ' + properties.cuisine + '</p>' +
+   '<p>Twitter: ' + '<a href="www.twitter.com/' + properties.twitter + '">' + '@' + properties.twitter + '</a></p>' +
+  '</div>';
   return marker.bindPopup(popupContent, {
     closeButton: false,
     minWidth: 320
