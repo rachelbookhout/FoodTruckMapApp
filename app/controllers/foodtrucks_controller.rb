@@ -10,7 +10,7 @@ class FoodtrucksController < ApplicationController
   # end
         @geojson = []
         @trucks.each do |truck|
-          if truck.class == Foodtruck
+          if truck.class == Foodtruck.class
           @truckinfo = Foodtruck.where(id: "#{truck.id}")
           @truckLocation = Schedule.where(foodtruck_id: "#{truck.id}")
           @location = Location.where(id: "#{@truckLocation.location_id}").first
@@ -43,5 +43,6 @@ class FoodtrucksController < ApplicationController
         format.html
         format.json { render json: @geojson }
       end
-     end
+      binding.pry
+    end
 end
