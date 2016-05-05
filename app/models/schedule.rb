@@ -5,14 +5,12 @@ class Schedule < ActiveRecord::Base
   belongs_to :location
 
   def self.search(search)
-  binding.pry
   if !@trucks.instance_of?(Array)
     @trucks = [];
   if search != nil
     # check search for cuisines
     @cuisines = Cuisine.where("name LIKE ?", "%#{search}%")
     if !@cuisines.empty?
-      binding.pry
       @cuisine_choice = Foodtruck.where(cuisine_id: "#{@cuisines[0]["cuisine_id"]}")
       @cuisine_choice.each do |cuisine|
         @trucks << cuisine
@@ -51,7 +49,6 @@ class Schedule < ActiveRecord::Base
   #else
 
   end
-binding.pry
   return @trucks
 end
 end
