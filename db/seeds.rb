@@ -2,20 +2,31 @@
 
 truckData = URI.parse("http://bostonfeed.me/backend/getLocation.php")
 vendorData = Net::HTTP.get(truckData)
-binding.pry
 data = JSON.parse(vendorData)
-binding.pry
+data.each do |key, hash|
+  days = hash["day"]
+  #binding.pry
+  if days.include? ','
+   daysArray = days.split(',')
+   daysArray.each do |day|
+    Truck.create(name: "#{hash["truck_name"]}", lat: "#{ hash["lat"]}",long: "#{ hash["lng"]}",
+    location: "#{  hash["message"]}", dayofweek_id: "#{day}",open_time: "#{  hash["open_time"]}",
+    close_time: "#{  hash["close_time"]}", cuisine: "#{ hash["food_type"]}")
+   end
+  else
+    Truck.create(name: "#{hash["truck_name"]}", lat: "#{ hash["lat"]}",long: "#{ hash["lng"]}",
+    location: "#{  hash["message"]}", dayofweek_id: "#{days}",open_time: "#{  hash["open_time"]}",
+    close_time: "#{  hash["close_time"]}", cuisine: "#{ hash["food_type"]}")
+  end
+end
 
-# vendorData = JSON.parse(truckData)["vendors"];
-# vendorData.each do |vendor|
-#   ven = Foodtruck.exists?(['name LIKE ?', "%#{vendor[1]["name"]}%"])
 
-#   if ven == false
-#     Foodtruck.create(name: "#{vendor[1]["name"]}", url: "#{vendor[1]["url"]}",twitter: "#{vendor[1]["twitter"]}")
-#   end
-
-#   loc = Location.where(["latitude = ? AND longitude = ? ", "#{vendor[1]["last"]["latitude"]}", "#{vendor[1]["last"]["longitude"]}"])
-#   if loc.empty? == true
-#     Location.create(name: "#{vendor[1]["last"]["display"]}", latitude: "#{vendor[1]["last"]["latitude"]}", longitude: "#{vendor[1]["last"]["longitude"]}")
-#   end
-# end
+Dayofweek.create!([
+  {day: "Monday"},
+  {day: "Tuesday"},
+  {day: "Wednesday"},
+  {day:"Thursday"},
+  {day:"Friday"},
+  {day: "Saturday"},
+  {day: "Sunday"}
+])

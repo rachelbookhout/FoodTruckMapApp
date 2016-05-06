@@ -16,9 +16,9 @@
       <div class="modal-body">
           <div class="row row-content">
             <div class="col-xs-12 col-sm-9">
-            <h4>Search By Location, Cuisine, or TimePeriod</h4>
             <h3 align=center style="color: black">
-             <%= form_tag(foodtrucks_path, :method => "get", id: "search-form") do %>
+             <%= form_tag(trucks_path, :method => "get", id: "search-form") do %>
+              <%= select_tag(:type, options_for_select([['Meal', "time"], ['Cuisine', "cuisine"], ['Location', "location"], ['Foodtruck', "truck"], ["Day","day"]], selected: :type )) %>
               <%= text_field_tag :search, params[:search], placeholder: "Search" %>
               <%= submit_tag "Search" %>
               </h3>
