@@ -16,7 +16,7 @@ map.featureLayer.on('layeradd', function(e) {
   popupContent ='<div class="popup">' + '<h3>'+ properties.name + '</a></h3>'
   + '<p>Location: ' + properties.spot + '</p>'
   +'<p>Cuisine: ' + properties.cuisine + '</p>'
-  + '<p>Hours:' + properies.day + " "+ properties.open_hours + '</p>'
+  + '<p>Hours:' + properties.day + " "+ properties.open_hours + '</p>'
   + '</div>';
   return marker.bindPopup(popupContent, {
     closeButton: false,
