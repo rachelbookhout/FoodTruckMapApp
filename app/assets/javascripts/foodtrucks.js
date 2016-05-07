@@ -1,6 +1,8 @@
  map = L.mapbox.map('map', 'rbookhout.jnj6mdfp', {
    accessToken: 'pk.eyJ1IjoicmJvb2tob3V0IiwiYSI6InplX2F1N2cifQ.OS0b9-WgU_ID7X99bui17g'
  });
+
+//set up the map and get the data from the trucks controller
 map.setView([42.366, -71.109], 13);
 $.ajax({
   dataType: 'json',
@@ -9,6 +11,8 @@ $.ajax({
     map.featureLayer.setGeoJSON(geoJSON);
   }
 });
+
+//start adding the pins in their proper location with their popup info
 map.featureLayer.on('layeradd', function(e) {
   var marker, popupContent, properties;
   marker = e.layer;

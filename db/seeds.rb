@@ -1,11 +1,13 @@
- require 'net/http'
+require 'net/http'
 
+#query bostonfeedme's json list of foodtrucks
 truckData = URI.parse("http://bostonfeed.me/backend/getLocation.php")
 vendorData = Net::HTTP.get(truckData)
 data = JSON.parse(vendorData)
+
+#iterate through the data and add it to the db
 data.each do |key, hash|
   days = hash["day"]
-  #binding.pry
   if days.include? ','
    daysArray = days.split(',')
    daysArray.each do |day|
