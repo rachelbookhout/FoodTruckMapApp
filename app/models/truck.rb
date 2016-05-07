@@ -4,6 +4,7 @@ class Truck < ActiveRecord::Base
   def self.search(search, type)
     if !@trucks.instance_of?(Array) || search != nil
       @trucks = []
+      search = search.capitalize
       if type == 'location'
         @results = Truck.where("location LIKE ?", "%#{search}%")
         @results.each do |result|
