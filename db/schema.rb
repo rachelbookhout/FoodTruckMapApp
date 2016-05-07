@@ -11,45 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160428020550) do
+ActiveRecord::Schema.define(version: 20160507182034) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cuisines", force: :cascade do |t|
-    t.integer "cuisine_id", null: false
-    t.string  "name"
+  create_table "dayofweeks", force: :cascade do |t|
+    t.string "day", null: false
   end
 
-  create_table "days", force: :cascade do |t|
-    t.integer "day_id",    null: false
-    t.string  "dayofweek", null: false
-  end
-
-  create_table "foodtrucks", force: :cascade do |t|
-    t.string  "name",       null: false
-    t.integer "cuisine_id"
-    t.string  "photo"
-    t.string  "url"
-    t.string  "twitter"
-  end
-
-  create_table "locations", force: :cascade do |t|
-    t.string "name",      null: false
-    t.float  "latitude",  null: false
-    t.float  "longitude", null: false
-  end
-
-  create_table "mealtimes", force: :cascade do |t|
-    t.integer "mealtime_id", null: false
-    t.string  "meal",        null: false
-  end
-
-  create_table "schedules", force: :cascade do |t|
-    t.integer "mealtime_id",  null: false
-    t.integer "day_id",       null: false
-    t.integer "foodtruck_id", null: false
-    t.integer "location_id",  null: false
+  create_table "trucks", force: :cascade do |t|
+    t.string  "name",         null: false
+    t.decimal "lat",          null: false
+    t.decimal "long",         null: false
+    t.string  "location"
+    t.integer "dayofweek_id"
+    t.integer "open_time"
+    t.integer "close_time"
+    t.string  "time"
+    t.string  "cuisine"
   end
 
 end
