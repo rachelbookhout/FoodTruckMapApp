@@ -19,7 +19,7 @@ map.featureLayer.on('layeradd', function(e) {
   + '<p>Hours:' + properties.day + " "+ properties.open_hours + '</p>'
   + '</div>';
   return marker.bindPopup(popupContent, {
-    closeButton: false,
+    closeButton: true,
     minWidth: 320
   });
 });

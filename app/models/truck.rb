@@ -2,7 +2,7 @@ class Truck < ActiveRecord::Base
   belongs_to :dayofweek
 
   def self.search(search, type)
-    if !@trucks.instance_of?(Array) && search != nil
+    if !@trucks.instance_of?(Array) || search != nil
       @trucks = []
       if type == 'location'
         @results = Truck.where("location LIKE ?", "%#{search}%")
@@ -10,7 +10,7 @@ class Truck < ActiveRecord::Base
           @trucks << result
          end
       elsif type == 'cuisine'
-          @results = Truck.where("cuisine LIKE ?", "%#{search}%")
+        @results = Truck.where("cuisine LIKE ?", "%#{search}%")
         @results.each do |result|
           @trucks << result
          end
@@ -20,20 +20,15 @@ class Truck < ActiveRecord::Base
         @results.each do |result|
           @trucks << result
          end
-      elsif type == 'day'
+      else type == 'day'
         @day = Dayofweek.where("day LIKE ?", "%#{search}%")
         @results = Truck.where(dayofweek_id: "#{@day[0]["id"]}")
         @results.each do |result|
           @trucks << result
          end
-      else
-        #time
-        @results = Truck.where("time LIKE ?", "%#{search}%")
-        @results.each do |result|
-          @trucks << result
-        end
       end
     end
+    sleep(2)
     return @trucks
   end
 end

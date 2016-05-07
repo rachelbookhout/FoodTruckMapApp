@@ -2,8 +2,9 @@
 
   def index
     @trucks = Truck.search(params[:search], params[:type])
-    if !@trucks.empty?
-    @geojson = []
+    if @trucks != nil
+     if !@trucks.empty?
+        @geojson = []
         @trucks.each do |truck|
           @day = Dayofweek.where(id: truck.dayofweek_id)
           @geojson << {
@@ -29,5 +30,6 @@
         format.json { render json: @geojson }
       end
     end
+   end
   end
 end
