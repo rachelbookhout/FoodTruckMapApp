@@ -1,0 +1,15 @@
+How to run this app:
+
+Option 1: Go to the website
+Go to https://secure-meadow-37467.herokuapp.com/
+
+Option 2: Run it locally
+
+1) Install Ruby -> to check if you have it, type ruby -v on your console. Otherwise, you can download it here: https://cache.ruby-lang.org/pub/ruby/2.0/ruby-2.0.0-p648.tar.gz
+I wrote the app within Ruby 2.0. Later versions should work but I can't guarntee that
+2) Install Rails ->  http://installrails.com/steps/choose_os
+3) Within the directory of the app while on the console, type in 'bundle install'. This will install all of the dependencies rails relies on to work.
+4) Create the database ->  Type in 'rake db:create' which creates the database then 'rake db:migrate' to create the tables that the app requires
+5) Type in 'rake db:seed'. This will seed the database
+6) To run this, type in 'rails s' which starts the server and navigate to 'http://localhost:3000/'
+7) If you would like to use breakpoints, you can type 'binding.pry' anywhere in the code and the application will be stopped when that line is read. You can check variables, run queries or anything you can do with a debugger. Additionally, if you type in 'rails c' in the console, this allows you to type ruby directly on the console (and test out logic, etc.) versus having to run the rails server everytime you want to try something.
